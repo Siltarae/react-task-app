@@ -10,7 +10,7 @@ type TActionButtonProps = {
 };
 
 const ActionButton: FC<TActionButtonProps> = ({ boardId, listId, list }) => {
-  const [isFormOpen, setIsFormOpen] = React.useState(true);
+  const [isFormOpen, setIsFormOpen] = React.useState(false);
   const buttonText = list ? "새로운 리스트 등록" : "새로운 일 등록";
   return isFormOpen ? (
     <DropDownForm
