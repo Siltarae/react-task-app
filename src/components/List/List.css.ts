@@ -23,7 +23,7 @@ export const header = style({
   alignItems: "center",
 });
 
-export const delteButton = style({
+export const deleteButton = style({
   padding: vars.spacing.small,
   borderRadius: 20,
   fontSize: vars.fontSizing.T2,

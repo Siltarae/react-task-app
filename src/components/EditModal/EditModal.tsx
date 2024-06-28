@@ -129,7 +129,6 @@ const EditModal = () => {
           value={data.task.taskOwner}
           onChange={handleAuthorChange}
         />
-
         <div className={buttons}>
           <button className={updateButton} onClick={handleUpdate}>
             일 수정하기

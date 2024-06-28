@@ -82,8 +82,8 @@ export const deleteButton = style({
   },
 });
 export const input = style({
-  width: "95%",
-  minHeight: "25px",
+  width: "100%",
+  minHeight: "30px",
   border: "none",
   borderRadius: 5,
   marginBottom: vars.spacing.big2,

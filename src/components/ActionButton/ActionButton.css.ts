@@ -11,7 +11,7 @@ export const taskButton = style({
   padding: vars.spacing.medium,
   cursor: "pointer",
   ":hover": {
-    backgroundColor: vars.color.secondaryDarkTextHober,
+    backgroundColor: vars.color.secondaryDarkTextHover,
   },
 });
 

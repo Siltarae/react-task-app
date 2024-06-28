@@ -7,7 +7,7 @@ export const logItemWrap = style({
   alignSelf: "flex-start",
   padding: vars.spacing.medium,
   marginBottom: vars.spacing.big2,
-  width: "95%",
+  width: "100%",
   borderBottom: "solid 1px rgb(191, 197, 217, 0.3)",
   ":hover": {
     backgroundColor: vars.color.mainFaded,

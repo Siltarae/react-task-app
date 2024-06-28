@@ -55,10 +55,11 @@ export const BoardItmeActive = style({
 export const addSection = style({
   display: "flex",
   alignItems: "center",
+  flexDirection: "row",
   marginLeft: "auto",
 });
 
 export const smallTitle = style({
   color: vars.color.brightText,
-  font: vars.fontSizing.T3,
+  fontSize: vars.fontSizing.T3,
 });
