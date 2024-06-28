@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { GrSubtract } from "react-icons/gr";
 import Task from "../Task/Task";
 import { IList, ITask } from "../../types";
@@ -31,12 +31,7 @@ const List: FC<TListProps> = ({ list, boardId }) => {
     );
   };
 
-  const handleTaskChange = (
-    boardId: string,
-    listId: string,
-    taskId: string,
-    task: ITask
-  ) => {
+  const handleTaskChange = (boardId: string, listId: string, task: ITask) => {
     dispatch(setModalData({ boardId, listId, task }));
     dispatch(setModalActive(true));
   };
@@ -58,9 +53,7 @@ const List: FC<TListProps> = ({ list, boardId }) => {
           </div>
           {list.tasks.map((task, index) => (
             <div
-              onClick={() =>
-                handleTaskChange(boardId, list.listId, task.taskId, task)
-              }
+              onClick={() => handleTaskChange(boardId, list.listId, task)}
               key={task.taskId}
             >
               <Task

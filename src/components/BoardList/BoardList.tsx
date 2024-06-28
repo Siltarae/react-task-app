@@ -21,7 +21,6 @@ import {
 import { app } from "../../firebase";
 import { removeUser, setUser } from "../../store/slices/userSlice";
 import { useAuth } from "../../hooks/useAuth";
-import { remove } from "firebase/database";
 
 type TBoardListProps = {
   activeBoardId: string;
