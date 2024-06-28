@@ -1,7 +1,7 @@
 import React, { FC, useState, useRef } from "react";
-import { useTypedSelector } from "../../hooks/redux";
+import { useTypedDispatch, useTypedSelector } from "../../hooks/redux";
 import SideForm from "./SideFrom/SideForm";
-import { FiPlusCircle } from "react-icons/fi";
+import { FiLogIn, FiPlusCircle } from "react-icons/fi";
 import {
   BoardItmeActive,
   addButton,
@@ -11,6 +11,17 @@ import {
   title,
 } from "./BoardList.css";
 import clsx from "clsx";
+import { GoSignOut } from "react-icons/go";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+} from "firebase/auth";
+import { app } from "../../firebase";
+import { removeUser, setUser } from "../../store/slices/userSlice";
+import { useAuth } from "../../hooks/useAuth";
+import { remove } from "firebase/database";
 
 type TBoardListProps = {
   activeBoardId: string;
@@ -21,9 +32,16 @@ const BoardList: FC<TBoardListProps> = ({
   activeBoardId,
   setActiveBoardId,
 }) => {
+  const dispatch = useTypedDispatch();
   const { boardArray } = useTypedSelector((state) => state.boards);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const { isAuth } = useAuth();
+  console.log(isAuth);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const auth = getAuth(app);
+
+  const provider = new GoogleAuthProvider();
 
   const handleClick = () => {
     setIsFormOpen(!isFormOpen);
@@ -32,6 +50,31 @@ const BoardList: FC<TBoardListProps> = ({
     // }, 0);
   };
 
+  const handleLogin = () => {
+    signInWithPopup(auth, provider)
+      .then((userCrendential) => {
+        console.log(userCrendential);
+        dispatch(
+          setUser({
+            email: userCrendential.user.email,
+            id: userCrendential.user.uid,
+          })
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        dispatch(removeUser());
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <div className={container}>
       <div className={title}>게시판:</div>
@@ -60,6 +103,12 @@ const BoardList: FC<TBoardListProps> = ({
           <SideForm inputRef={inputRef} setIsFormOpen={setIsFormOpen} />
         ) : (
           <FiPlusCircle className={addButton} onClick={handleClick} />
+        )}
+
+        {isAuth ? (
+          <GoSignOut className={addButton} onClick={handleSignOut} />
+        ) : (
+          <FiLogIn className={addButton} onClick={handleLogin} />
         )}
       </div>
     </div>
